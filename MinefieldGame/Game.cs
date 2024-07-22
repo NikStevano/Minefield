@@ -53,8 +53,8 @@
 
         public void Help()
         {
-            Console.WriteLine("You are on the {0}x{1} board. The goal is to move player from position A1 (bottom left) to the top right position but be carefull, mines are lurking everywhere", boardSize, boardSize);
-            Console.WriteLine("\nFollowing commands are available:");
+            Console.WriteLine("You are on a {0}x{1} board. The goal is to move your player from position A1 (bottom left) to the top right position but be careful, mines are lurking everywhere", boardSize, boardSize);
+            Console.WriteLine("\nThe following commands are available:");
             Console.WriteLine(" h = show instructions");
             Console.WriteLine(" l = move left");
             Console.WriteLine(" r = move right");
@@ -136,7 +136,7 @@
                     MoveDown();
                     break;
                 default:
-                    Console.WriteLine("Unknown command. Use h for see supported commands.");
+                    Console.WriteLine("Unknown command. Use h to see supported commands.");
                     break;
             }
 
@@ -148,7 +148,7 @@
                 if (board[gameState.position] == boardContent.MINE)
                 {
                     gameState.lives--;
-                    Console.WriteLine("BOOM! Unfortunatelly you hit a mine :(");
+                    Console.WriteLine("BOOM! Unfortunately you hit a mine :(");
                 }
                 board[gameState.position] = boardContent.PLAYER;
             }
