@@ -10,7 +10,8 @@ namespace MinefieldGameTests
         [TestMethod()]
         public void EdgeMovementSuccessTest()
         {
-            Game game = new Game(8, 14, 62);
+            Game game = new Game(8);
+            game.ReadyGame(14, 62);
 
             // we will try to move too many times, hit 13 mines along the way
 
@@ -35,7 +36,9 @@ namespace MinefieldGameTests
         [TestMethod()]
         public void DiagonalMovementSuccessTest()
         {
-            Game game = new Game(8, 14, 62);
+            Game game = new Game(8);
+            game.ReadyGame(14, 62);
+
             for (int i = 0; i < 8; i++)
             {
                 // move up
@@ -54,7 +57,8 @@ namespace MinefieldGameTests
         [TestMethod()]
         public void NoMinesSuccessTest()
         {
-            Game game = new Game(8, 1, 0);
+            Game game = new Game(8);
+            game.ReadyGame(1, 0);
             // no mines and only one life
             // go diagonal
             for (int i = 0; i < 8; i++)
@@ -75,7 +79,8 @@ namespace MinefieldGameTests
         [TestMethod()]
         public void OutOfLivesTest()
         {
-            Game game = new Game(8, 1, 62);
+            Game game = new Game(8);
+            game.ReadyGame(1, 62);
             // move up, it will hit a mine
             game.ProcessCommand('u');
 
@@ -92,7 +97,8 @@ namespace MinefieldGameTests
             try
             {
                 // too many mines
-                Game game = new Game(8, 1, 100);
+                Game game = new Game(8);
+                game.ReadyGame(1, 100);
                 Assert.Fail("No exception thrown!");
             }
             catch (Exception e)

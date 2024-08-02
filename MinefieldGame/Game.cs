@@ -35,20 +35,16 @@
 
         private GameState gameState;
 
-        public Game(int boardSize = 8, int lives = 4, int mines = 8)
+        public Game(int boardSize = 8)
         {
             this.boardSize = boardSize;
             boardTotalCells = boardSize * boardSize;
 
             // check parameters make sense
-            if (boardSize < 4 || lives < 0 || mines > (boardTotalCells - 2))
+            if (boardSize < 4)
                 throw new ArgumentException();
 
             board = new boardContent[boardTotalCells];
-            gameState = new GameState(lives, mines);
-
-            InitBoard();
-
         }
 
         public void Help()
@@ -62,6 +58,15 @@
             Console.WriteLine(" d = move down");
             Console.WriteLine(" p = print map");
             Console.WriteLine(" q = quit game\n");
+        }
+
+        public void ReadyGame(int lives = 4, int mines = 8)
+        {
+            if (lives < 0 || mines > (boardTotalCells - 2))
+                throw new ArgumentException();
+
+            gameState = new GameState(lives, mines);
+            InitBoard();
         }
 
         private void InitBoard()
@@ -247,8 +252,9 @@
             Console.Write(" ");
             for (int i = 0; i < boardSize; i++)
             {
-                Console.Write((char)((byte)'A' + (byte)(i)));
+                Console.Write((char)('A' + i));
             }
+
             Console.WriteLine();
 
         }
@@ -266,7 +272,7 @@
 
         private string GetPrintableStatus()
         {
-            return "CURRENT POSITION: " + GetPrintablePlayerPosition() + "\t LIVES LEFT: " + gameState.lives;
+            return "CURRENT POSITION: " + GetPrintablePlayerPosition() + "\t MOVES: " + gameState.moves + "\t LIVES LEFT: " + gameState.lives;
         }
     }
 }
